@@ -1,12 +1,25 @@
-version: '3.4'
-
+version: '3.4' # กำหนด docker version
 services:
-  nestjsmysqldocker:
-    image: nestjsmysqldocker
-    build:
+  nestjs_api:
+    container_name: nestjs_api
+    image: nestjs_api
+    build: # ตำแหน่ง Dockerfile
       context: .
       dockerfile: ./Dockerfile
-    environment:
-      NODE_ENV: production
     ports:
-      - 8000:8000
+      - '8000:8000' # map port ออกมา เหมือน -p ใน docker run
+    environment:
+      - PORT=8000
+      - NODE_ENV=development
+    volumes:
+      - ./src:/usr/src/app/src
+  # mysql_db:
+  #   image: mysql
+  #   ports:
+  #     - '3306:3306'
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=1234
+  #     - MYSQL_DATABASE=nestjs_docker_tutorial
+  #     - MYSQL_USER=root
+  #     - MYSQL_PASSWORD=1234
+  #     - MYSQL_TCP_PORT=3306

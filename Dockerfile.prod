@@ -10,8 +10,12 @@ COPY . .
 # ติดตั้ง dependencies
 RUN npm install
 
+# สร้างแอปพลิเคชัน
+RUN npm run build
+RUN rm -rf ./src
+
 # ตั้งค่า port ที่จะใช้งาน
 EXPOSE 8000
 
-# รันแอปพลิเคชัน npm run start:dev
-CMD ["npm", "run", "start:dev"]
+# รันแอปพลิเคชัน
+CMD ["npm", "run", "start:prod"]

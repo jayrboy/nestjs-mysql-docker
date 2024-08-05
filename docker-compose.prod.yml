@@ -1,0 +1,15 @@
+version: '3.4' # กำหนด docker version
+services:
+  nestjs_api_prod:
+    container_name: nestjs_api_prod
+    image: nestjs_api_prod
+    build: # ตำแหน่ง Dockerfile
+      context: .
+      dockerfile: ./Dockerfile.prod
+    ports:
+      - '8001:8001' # map port ออกมา เหมือน -p ใน docker run
+    environment:
+      - PORT=8001
+      - NODE_ENV=production
+    volumes:
+      - ./src:/usr/src/app/src
