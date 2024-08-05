@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -7,13 +8,16 @@ import { User } from './modules/users/entities/user.entity';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: ['.env'],
+    }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'mysql-server', // localhost
-      port: 3306,
-      database: 'nestjs_db',
-      username: 'root',
-      password: '1234',
+      host: process.env.DB_HOST || 'mysql-server',
+      port: parseInt(process.env.DB_PORT) || 3306,
+      username: process.env.DATABASE_USERNAME || 'root',
+      password: process.env.DATABASE_PASSWORD || '1234',
+      database: process.env.DB_NAME || 'nestjs_db',
       entities: [User],
       synchronize: true,
     }),
