@@ -87,3 +87,11 @@ https://docs.nestjs.com/techniques/configuration
 ```bash
 npm i --save @nestjs/config
 ```
+
+# Swagger API
+
+https://docs.nestjs.com/openapi/introduction
+
+```bash
+npm install --save @nestjs/swagger
+```
